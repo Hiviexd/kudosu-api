@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { consoleCheck } from "./logger";
+
 declare global {
     var mongoose: any; // This must be a `var` and not a `let / const`
 }
@@ -21,9 +23,10 @@ async function database() {
     }
     if (!cached.promise) {
         const opts = {
-            bufferCommands: false,
+            bufferCommands: true,
         };
         cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+            consoleCheck("Database", "Connected to MongoDB");
             return mongoose;
         });
     }
