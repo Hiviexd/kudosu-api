@@ -10,7 +10,7 @@ endpoints are present at https://kudosu-api.vercel.app, and are as follows:
 - `/api/rank/{rank}` - get a user by their kudosu rank
 - `/api/ranking/{page}` - get a page of users from the kudosu ranking leaderboard, each page contains 50 users
 
-routes return a single, or an array `KudosuUser` object(s). the `KudosuUser` object is defined as follows:
+routes return a single, or an array of `KudosuUser` object(s). the `KudosuUser` object is defined as follows:
 
 ```typescript
 interface IKudosuUser {
