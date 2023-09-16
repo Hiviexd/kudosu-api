@@ -26,13 +26,16 @@ interface IKudosuUser {
 
 ## running locally
 
+>[!WARNING]
+>the actual part that syncs data from the osu! api and updates the db is not present here, it's running on my [discord bot](https://github.com/AxerBot/axer-bot/blob/main/modules/automation/jobs/updateKudosuRankings.ts). the only thing this app does is fetch from the db (with some caching involved) and provide endpoints.
+
 - clone the repo
 - run `npm install`
 - create a `.env.local` file in the root directory from `.env.local.example`
 - run `npm run dev`, the api should be running on `localhost:3000`
 
 >[!NOTE]
->this api was specifically created for my kudosu rank userscript, tho i'll try to keep this api running until there is proper support for kudosu rank in the official api. but don't be surprised if this might just go offline at one point.
+>this api was specifically created for my [kudosu rank userscript](https://github.com/Hiviexd/kudosu-rank), tho i'll try to keep this api running until there is proper support for kudosu rank in the official api. but don't be surprised if this might just go offline at one point.
 
 ## todo
 
