@@ -13,12 +13,18 @@ export default function Home() {
             <div className={styles.footer}>
                 <div className={styles.outro}>
                     <span>made with 🤍 by</span>
-                    <a href="https://osu.ppy.sh/users/14102976" className={styles.link}>
+                    <a
+                        className={styles.link}
+                        href="https://osu.ppy.sh/users/14102976"
+                        target="_blank">
                         Hivie
                     </a>
                 </div>
                 <div className={styles.outro}>
-                    <a href="https://github.com/Hiviexd/kudosu-api" className={styles.link}>
+                    <a
+                        className={styles.link}
+                        href="https://github.com/Hiviexd/kudosu-api"
+                        target="_blank">
                         github repo
                     </a>
                 </div>
