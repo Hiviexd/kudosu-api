@@ -1,0 +1,46 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+    gap: 6rem;
+}
+
+.header {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 0.85rem;
+    max-width: var(--max-width);
+    width: 100%;
+    gap: 0.5rem;
+    font-size: 1rem;
+    /*font-family: var(--font-mono);*/
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.link {
+    margin: 0 0.4rem;
+    transition: all 200ms;
+    color: rgb(148, 182, 255);
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: gray;
+}

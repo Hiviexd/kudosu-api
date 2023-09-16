@@ -1,81 +1,40 @@
-# MongoDB and Mongoose with Next.js
+# kudosu-api
 
-This example shows how you can use a MongoDB database to support your Next.js application.
+this api is mainly used to get a user's kudosu ranking, among other basic data. it works by using [osu!api v2](https://osu.ppy.sh/docs/index.html) to get the top 1k users of the kudosu ranking leaderboard, and saving them to a database every hour.
 
-**Pet** is an application that allows users to add their pets' information (e.g., name, owner's name, diet, age, dislikes, likes, and photo). They can also delete it or edit it anytime.
+## usage
 
-## Deploy your own
+endpoints are present at https://kudosu-api.vercel.app, and are as follows:
 
-Once you have access to [the environment variables you'll need](#step-2-set-up-environment-variables), deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+- `/api/user/{osuId}` - get a user by their osu! id
+- `/api/rank/{rank}` - get a user by their kudosu rank
+- `/api/ranking/{page}` - get a page of users from the kudosu ranking leaderboard, each page contains 50 users
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose&project-name=with-mongodb-mongoose&repository-name=with-mongodb-mongoose&env=MONGODB_URI&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB&envLink=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose%23step-2-set-up-environment-variables)
+routes return a single, or an array `KudosuUser` object(s). the `KudosuUser` object is defined as follows:
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-mongodb-mongoose with-mongodb-mongoose-app
+```typescript
+interface IKudosuUser {
+    _id: string;
+    avatar_url: string;
+    osuId: number;
+    username: string;
+    rank: number;
+    kudosu: number;
+    updatedAt: Date;
+}
 ```
 
-```bash
-yarn create next-app --example with-mongodb-mongoose with-mongodb-mongoose-app
-```
+## running locally
 
-```bash
-pnpm create next-app --example with-mongodb-mongoose with-mongodb-mongoose-app
-```
+- clone the repo
+- run `npm install`
+- create a `.env.local` file in the root directory from `.env.local.example`
+- run `npm run dev`, the api should be running on `localhost:3000`
 
-## Configuration
+>[!NOTE]
+>this api was specifically created for my kudosu rank userscript, tho i'll try to keep this api running until there is proper support for kudosu rank in the official api. but don't be surprised if this might just go offline at one point.
 
-### Step 1. Get the connection string of your MongoDB server
+## todo
 
-In the case of MongoDB Atlas, it should be a string like this:
-
-```
-mongodb+srv://<username>:<password>@my-project-abc123.mongodb.net/test?retryWrites=true&w=majority
-```
-
-For more details, follow this [MongoDB Guide](https://docs.mongodb.com/guides/server/drivers/) on how to connect to MongoDB.
-
-### Step 2. Set up environment variables
-
-Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
-
-```bash
-cp .env.local.example .env.local
-```
-
-Then set each variable on `.env.local`:
-
-- `MONGODB_URI` should be the MongoDB connection string you got from step 1.
-
-### Step 3. Run Next.js in development mode
-
-```bash
-npm install
-npm run dev
-
-# or
-
-yarn install
-yarn dev
-```
-
-Your app should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
-
-## Deploy on Vercel
-
-You can deploy this app to the cloud with [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-#### Deploy Your Local Project
-
-To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/import/git?utm_source=github&utm_medium=readme&utm_campaign=next-example).
-
-**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.
-
-#### Deploy from Our Template
-
-Alternatively, you can deploy using our template by clicking on the Deploy button below.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose&project-name=with-mongodb-mongoose&repository-name=with-mongodb-mongoose&env=MONGODB_URI&envDescription=Required%20to%20connect%20the%20app%20with%20MongoDB&envLink=https://github.com/vercel/next.js/tree/canary/examples/with-mongodb-mongoose%23step-2-set-up-environment-variables)
+- [ ] add caching for `/api/rank`
+- [ ] possibly build a proper frontend that has an actual leaderboard

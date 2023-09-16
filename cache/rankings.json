@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "_id": "b9d2409b-6654-47a6-8fd1-88a861c5668f",
+            "avatar_url": "https://a.ppy.sh/14102976?1694627467.jpeg",
+            "osuId": 14102976,
+            "username": "Hivie",
+            "rank": 85,
+            "kudosu": 3174,
+            "updatedAt": "2023-09-15T20:48:22.939Z",
+            "__v": 0
+        }
+    ]
+}
