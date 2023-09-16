@@ -5,15 +5,17 @@ import { consoleCheck, consoleLog } from "./logger";
 import { kudosuUsers } from "@models/KudosuUser";
 
 export async function getUserWithCache(osuId: number) {
+    const cacheDir = process.env.NODE_ENV === "production" ? "/tmp/cache" : "./cache";
+
     // directory and files check
-    if (!fs.existsSync("./cache")) {
-        fs.mkdirSync("./cache");
+    if (!fs.existsSync(cacheDir)) {
+        fs.mkdirSync(cacheDir);
         consoleCheck("Cache", "Cache directory created");
     }
 
-    if (!fs.existsSync(path.resolve("./cache/rankings.json"))) {
+    if (!fs.existsSync(path.resolve(`${cacheDir}/rankings.json`))) {
         fs.writeFileSync(
-            path.resolve("./cache/rankings.json"),
+            path.resolve(`${cacheDir}/rankings.json`),
             JSON.stringify(
                 {
                     users: [],
@@ -25,7 +27,7 @@ export async function getUserWithCache(osuId: number) {
         consoleCheck("Cache", "Cache files created");
     }
 
-    let rankings = JSON.parse(fs.readFileSync(path.resolve("./cache/rankings.json"), "utf-8"));
+    let rankings = JSON.parse(fs.readFileSync(path.resolve(`${cacheDir}/rankings.json`), "utf-8"));
 
     let user = rankings.users.find((user: any) => user.osuId === osuId);
 
@@ -50,7 +52,7 @@ export async function getUserWithCache(osuId: number) {
                 });
 
                 fs.writeFileSync(
-                    path.resolve("./cache/rankings.json"),
+                    path.resolve(`${cacheDir}/rankings.json`),
                     JSON.stringify(rankings, null, 3)
                 );
 
@@ -63,7 +65,7 @@ export async function getUserWithCache(osuId: number) {
                 rankings.users.push(dbUser);
 
                 fs.writeFileSync(
-                    path.resolve("./cache/rankings.json"),
+                    path.resolve(`${cacheDir}/rankings.json`),
                     JSON.stringify(rankings, null, 3)
                 );
 
@@ -77,7 +79,7 @@ export async function getUserWithCache(osuId: number) {
             rankings.users = rankings.users.filter((user: any) => user.osuId !== osuId);
 
             fs.writeFileSync(
-                path.resolve("./cache/rankings.json"),
+                path.resolve(`${cacheDir}/rankings.json`),
                 JSON.stringify(rankings, null, 3)
             );
 
