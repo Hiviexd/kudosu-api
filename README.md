@@ -1,5 +1,10 @@
 # kudosu-api
 
+>[!CAUTION]
+> this project is deprecated. running this api eats up all of my vercel limits (1M requests/month), and kudosu ranks have been added to osu! profiles so running this further is pointless. 
+
+---
+
 this api is mainly used to get a user's kudosu ranking, among other basic data. it works by using [osu!api v2](https://osu.ppy.sh/docs/index.html) to get the top 1k users of the kudosu ranking leaderboard, and saving them to a database every hour.
 
 ## usage
